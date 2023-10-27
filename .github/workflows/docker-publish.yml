@@ -28,7 +28,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: ${{ github.workspace }}/nodeapp/app/
-        file: ${{ github.workspace }}/nodeapp/Dockerfile
+        file: ${{ github.workspace }}/nodeapp/app/Dockerfile
         # Asume que tu Dockerfile está en la raíz de tu repositorio
         # Si tu Dockerfile está en una ruta específica, por ejemplo, ./path/to/Dockerfile, cambia 'context' y 'file' como sigue:
         # context: ./path/to/

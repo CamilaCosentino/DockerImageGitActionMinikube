@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-express-deployment
+  namespace: mongo-express-prometheus-grafana
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mongo-express
+  template:
+    metadata:
+      labels:
+        app: mongo-express
+    spec:
+      containers:
+      - name: mongo-express
+        image: camila232dmnfdn2i/nodeapp_mongodb:1.0.0
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret-name
+              key: ME_CONFIG_MONGODB_USERNAME
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret-pass
+              key: ME_CONFIG_MONGODB_PASSWORD
+        - name: ME_CONFIG_MONGODB_SERVER
+          value: mongo-express-service
+        volumeMounts:
+        - name:  nodeapp-data
+          mountPath: /data/nodeapp-data
+      volumes:
+      - name: mongo-configmap
+        configMap:
+          name: mongo-configmap
+      
+        
+

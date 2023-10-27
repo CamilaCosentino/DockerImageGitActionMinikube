@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: nodeapp-service
+  namespace: mongo-express-prometheus-grafana
+spec:
+  type: NodePort
+  selector:
+    app: nodeapp
+  ports:
+  - port: 8080
+    targetPort: 8080
+    nodePort: 30002

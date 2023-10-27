@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: prometheus-deployment
+  namespace: mongo-express-prometheus-grafana
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: prometheus
+  template:
+    metadata: 
+      labels:
+        app: prometheus
+      spec:
+        containers:
+        - name: prometheus
+          image: prom/prometheus
+          ports:
+          - containerPort: 9090

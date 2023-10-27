@@ -5,12 +5,13 @@ on:
    paths:
      - 'nodeapp/app/**'
   pull_request:
+    branches: [ "master" ]
     paths:
       - 'nodeapp/app/**'
 
 jobs:
   build-and-push:
-    runs-on: node20-alpine3.17
+    runs-on: ubuntu-latest
     steps:
     - name: Check out the code
       uses: actions/checkout@v2
@@ -35,3 +36,4 @@ jobs:
         # file: ./path/to/Dockerfile
         push: true
         tags: camila232dmnfdn2i/nodeapp_mongodb:v1.0.0 # Cambia esto con tu nombre de usuario y nombre de imagen
+}
